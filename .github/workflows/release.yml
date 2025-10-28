@@ -1,0 +1,44 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  release:
+    name: Create Release
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Extract version from tag
+      id: version
+      run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
+
+    - name: Create Release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ github.ref }}
+        release_name: Release ${{ github.ref }}
+        body: |
+          ## Silent Alarm Detector ${{ steps.version.outputs.VERSION }}
+
+          See [CHANGELOG.md](https://github.com/${{ github.repository }}/blob/main/CHANGELOG.md) for details.
+
+          ### Installation
+
+          ```bash
+          cd ~/.claude/hooks/
+          git clone https://github.com/${{ github.repository }}.git silent-alarm-detector
+          cd silent-alarm-detector
+          git checkout ${{ github.ref }}
+          ```
+
+          See [INSTALLATION.md](INSTALLATION.md) for configuration.
+        draft: false
+        prerelease: false

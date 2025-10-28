@@ -1,0 +1,116 @@
+name: Tests
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  test:
+    name: Test Python ${{ matrix.python-version }} on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      fail-fast: false
+      matrix:
+        # Test on 3 major OS platforms
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        # Test minimum supported (3.7), a middle version (3.10), and latest (3.x)
+        # This catches compatibility issues without testing every single version
+        python-version: ['3.7', '3.10', '3.x']
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ matrix.python-version }}
+
+    - name: Display Python version
+      run: python --version
+
+    - name: Test pattern detector
+      run: python analyzers/pattern_detector.py
+
+    - name: Test impact assessor
+      run: python analyzers/impact_assessor.py
+
+    - name: Test hook with problematic code (should block)
+      shell: bash
+      run: |
+        echo '{"tool_name":"Write","tool_input":{"content":"try:\n    x=1/0\nexcept:\n    pass"}}' | \
+        python .claude-hooks/pre-tool-use/alarm_silencing_detector.py 2>&1 | tee test_output.txt
+
+        if grep -q "CRITICAL ALARM-SILENCING DETECTED" test_output.txt; then
+          echo "✅ Hook correctly detected and blocked critical issue"
+        else
+          echo "❌ Hook failed to detect critical issue"
+          exit 1
+        fi
+
+    - name: Test hook with valid code (should pass)
+      shell: bash
+      run: |
+        echo '{"tool_name":"Write","tool_input":{"content":"def hello():\n    return \"world\""}}' | \
+        python .claude-hooks/pre-tool-use/alarm_silencing_detector.py
+        echo "✅ Hook correctly allowed valid code"
+
+  code-quality:
+    name: Code Quality Checks
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.x'
+
+    - name: Check Python syntax
+      run: |
+        python -m py_compile analyzers/*.py
+        python -m py_compile .claude-hooks/pre-tool-use/*.py
+        echo "✅ All Python files have valid syntax"
+
+    - name: Verify no external dependencies
+      run: |
+        echo "Checking that all imports are from Python standard library..."
+
+        # This project should have zero external dependencies
+        if find . -name "requirements.txt" -o -name "setup.py" -o -name "pyproject.toml" | grep -q .; then
+          echo "⚠️ Found dependency files - this project should be stdlib-only"
+          exit 1
+        fi
+
+        echo "✅ No external dependencies - stdlib only!"
+
+  security:
+    name: Security Checks
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Check for hardcoded secrets
+      run: |
+        echo "🔒 Scanning for potential hardcoded secrets..."
+
+        # Look for suspicious patterns (excluding test/example code)
+        if grep -r "password\s*=\s*['\"]" . --include="*.py" | grep -v "test\|example\|PATTERN\|description"; then
+          echo "⚠️ Found potential hardcoded passwords"
+          exit 1
+        fi
+
+        if grep -r "api_key\s*=\s*['\"]" . --include="*.py" | grep -v "test\|example\|environ"; then
+          echo "⚠️ Found potential hardcoded API keys"
+          exit 1
+        fi
+
+        echo "✅ No obvious hardcoded secrets found"

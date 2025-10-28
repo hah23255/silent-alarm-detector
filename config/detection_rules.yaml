@@ -1,0 +1,82 @@
+# Silent Alarm Detector Configuration
+# Configure detection thresholds and behavior
+
+# Detection sensitivity
+sensitivity:
+  # "strict" (block on any critical), "balanced" (default), "permissive" (warn only)
+  mode: balanced
+
+# Thresholds for blocking vs warning
+thresholds:
+  block_on_critical_count: 1  # Block if >= N critical issues
+  block_on_impact_score: 80   # Block if total impact >= this
+  warn_on_impact_score: 40    # Warn if impact >= this
+
+# Pattern-specific settings
+patterns:
+  silent_fallback:
+    enabled: true
+    severity_override: null  # null = use default, or CRITICAL/WARNING/INFO
+
+  warning_suppression:
+    enabled: true
+    severity_override: null
+
+  assumption_bypass:
+    enabled: true
+    severity_override: null
+    # Only flag if function has > N parameters without validation
+    min_params_for_check: 2
+
+  duplicate_code:
+    enabled: true
+    severity_override: null
+    # Minimum lines to consider duplication
+    min_duplicate_lines: 10
+
+  performance_degradation:
+    enabled: true
+    severity_override: null
+
+  security_shortcut:
+    enabled: true
+    severity_override: null  # Always critical!
+
+  error_masking:
+    enabled: true
+    severity_override: null
+
+  test_avoidance:
+    enabled: true
+    severity_override: null
+
+# Tools to monitor
+monitored_tools:
+  - Write
+  - Edit
+  - Bash  # Only for Python code in bash
+
+# Code size thresholds
+code_analysis:
+  min_code_length: 20      # Skip code shorter than this
+  max_code_length: 50000   # Don't analyze huge files (performance)
+
+# Logging
+logging:
+  enabled: true
+  log_file: data/detection_history.jsonl
+  retention_days: 90
+
+# Reporting
+reporting:
+  show_impact_score: true
+  show_recommendations: true
+  max_issues_to_display: 5
+
+# Integration with existing security hooks
+integration:
+  # Run after existing security_guard.py?
+  run_after_security_guard: true
+
+  # Coordinate with other hooks
+  respect_existing_blocks: true
