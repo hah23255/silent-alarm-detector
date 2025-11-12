@@ -510,9 +510,8 @@ If this hook helped you prevent technical debt, please star the repo!
 
 ## 📱 Connect
 
-- **Twitter/X:** [@yourusername](https://twitter.com/yourusername)
-- **LinkedIn:** [Your Name](https://linkedin.com/in/yourprofile)
-- **Blog:** [Your Blog](https://yourblog.com)
+- **LinkedIn:** [Hristo Hristov](https://www.linkedin.com/in/hristo-hristov-93868648)
+- **Web:** [www.ccvs.tech](https://www.ccvs.tech)
 
 ---
 
