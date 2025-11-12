@@ -1,129 +1,113 @@
 # Pull Request
 
-## 📋 Description
+## Description
 
-<!-- Provide a clear and concise description of what this PR does -->
+<!--- Provide a clear and concise description of the changes -->
 
-## 🎯 Motivation
+## Type of Change
 
-<!-- Why are these changes needed? What problem does this solve? -->
+- [ ] Bug fix (non-breaking change which fixes an issue)
+- [ ] New feature (non-breaking change which adds functionality)
+- [ ] Breaking change (fix or feature that would cause existing functionality to not work as expected)
+- [ ] Documentation update
+- [ ] Performance improvement
+- [ ] Code refactoring
+- [ ] Test additions/updates
 
-Closes #(issue number)
+## Motivation and Context
 
-## 🔄 Type of Change
+<!--- Why is this change required? What problem does it solve? -->
+<!--- If it fixes an open issue, please link to the issue here -->
 
-<!-- Mark the relevant option with an 'x' -->
+Fixes #(issue)
 
-- [ ] 🐛 Bug fix (non-breaking change that fixes an issue)
-- [ ] ✨ New feature (non-breaking change that adds functionality)
-- [ ] 💥 Breaking change (fix or feature that would cause existing functionality to not work as expected)
-- [ ] 📝 Documentation update
-- [ ] 🎨 Code style/refactoring (no functional changes)
-- [ ] 🧪 Test additions/updates
-- [ ] ⚙️ Configuration changes
+## How Has This Been Tested?
 
-## 📊 Changes Made
+<!--- Please describe how you tested your changes -->
+<!--- Include details of your testing environment, tests ran, etc. -->
 
-<!-- List the specific changes in this PR -->
+- [ ] Test A (describe)
+- [ ] Test B (describe)
 
-- Added ...
-- Modified ...
-- Removed ...
-- Fixed ...
-
-## 🧪 Testing
-
-<!-- Describe the tests you ran and how to reproduce them -->
-
-**Test Configuration:**
+**Test Configuration**:
 - Python version:
-- OS:
-- Claude Code version:
+- Operating System:
+- FACT version:
 
-**Tests Performed:**
-- [ ] Ran existing test suite (`python3 analyzers/pattern_detector.py`)
-- [ ] Ran impact assessor tests (`python3 analyzers/impact_assessor.py`)
-- [ ] Tested main hook integration
-- [ ] Tested with Claude Code in real workflow
-- [ ] Added new test cases for new features
-- [ ] All tests pass
+## Code Quality Checklist
 
-**Manual Testing:**
-```bash
-# Commands used to test
-```
-
-## 📸 Screenshots / Examples
-
-<!-- If applicable, add screenshots or example outputs -->
-
-**Before:**
-```
-[paste before behavior/output]
-```
-
-**After:**
-```
-[paste after behavior/output]
-```
-
-## ✅ Checklist
-
-<!-- Mark completed items with an 'x' -->
-
-### Code Quality
-- [ ] My code follows the project's code style (PEP 8)
-- [ ] I have added type hints to new functions
-- [ ] I have added docstrings to new functions/classes
-- [ ] I have commented complex logic
+- [ ] My code follows the project's style guidelines
+- [ ] I have performed a self-review of my own code
+- [ ] I have commented my code, particularly in hard-to-understand areas
+- [ ] I have made corresponding changes to the documentation
 - [ ] My changes generate no new warnings
+- [ ] I have added tests that prove my fix is effective or that my feature works
+- [ ] New and existing unit tests pass locally with my changes
+- [ ] Any dependent changes have been merged and published
 
-### Testing
-- [ ] I have added tests that prove my fix/feature works
-- [ ] New and existing unit tests pass locally
-- [ ] I have tested edge cases
-- [ ] I have tested error handling
+## Testing Checklist
 
-### Documentation
-- [ ] I have updated relevant documentation (README, INSTALLATION, etc.)
-- [ ] I have updated CHANGELOG.md with my changes
-- [ ] I have added inline code comments for clarity
-- [ ] My commit messages are clear and descriptive
+- [ ] All existing tests pass
+- [ ] Added new tests for new functionality
+- [ ] Test coverage is maintained or improved
+- [ ] Integration tests pass (if applicable)
+- [ ] Performance benchmarks pass (if applicable)
 
-### Configuration
-- [ ] I updated `config/detection_rules.yaml` if needed
-- [ ] I updated `.gitignore` if adding new generated files
-- [ ] I updated `DECISIONS.md` if making architecture changes
+## Documentation Checklist
 
-## 🔗 Related Issues/PRs
+- [ ] Updated README.md (if needed)
+- [ ] Updated API documentation (if needed)
+- [ ] Updated inline code comments
+- [ ] Added docstrings to new functions/classes
+- [ ] Updated CHANGELOG.md
 
-<!-- Link related issues or PRs -->
+## Performance Impact
 
-- Relates to #
-- Depends on #
-- Blocks #
+<!--- Describe any performance implications -->
 
-## 📝 Additional Notes
+- [ ] No performance impact
+- [ ] Performance improvement (describe below)
+- [ ] Minor performance degradation (acceptable because...)
+- [ ] Significant performance impact (requires discussion)
 
-<!-- Any additional information, concerns, or context -->
+**Details**:
 
-## 🎓 Learning
+## Breaking Changes
 
-<!-- (Optional) What did you learn while working on this? -->
+<!--- Does this PR introduce breaking changes? -->
 
-## 🙋 Questions for Reviewers
+- [ ] No breaking changes
+- [ ] Breaking changes (describe below)
 
-<!-- Any specific areas you'd like reviewers to focus on? -->
+**If breaking changes, describe**:
+- What breaks:
+- Why it's necessary:
+- Migration path for users:
+
+## Screenshots
+
+<!--- If applicable, add screenshots to help explain your changes -->
+
+## Additional Notes
+
+<!--- Any additional information that reviewers should know -->
+
+## Reviewer Guidance
+
+<!--- Optional: specific areas you'd like reviewers to focus on -->
+
+- Please pay special attention to:
+- Known limitations/concerns:
+- Alternative approaches considered:
+
+## Checklist for Maintainers
+
+- [ ] Code reviewed and approved
+- [ ] Tests reviewed and passing
+- [ ] Documentation reviewed
+- [ ] CHANGELOG updated
+- [ ] Ready to merge
 
 ---
 
-## For Maintainers
-
-**Review Checklist:**
-- [ ] Code quality is acceptable
-- [ ] Tests are comprehensive
-- [ ] Documentation is updated
-- [ ] No breaking changes (or properly documented)
-- [ ] Performance impact is acceptable
-- [ ] Security implications considered
-- [ ] CHANGELOG.md updated
+**Thank you for contributing to FACT!** 🎉

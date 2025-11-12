@@ -1,68 +1,64 @@
 ---
-name: Bug Report
-about: Report a bug or issue with Silent Alarm Detector
+name: Bug report
+about: Create a report to help us improve
 title: '[BUG] '
 labels: bug
 assignees: ''
 ---
 
-## 🐛 Bug Description
+## Bug Description
 
 A clear and concise description of what the bug is.
 
-## 📋 Steps to Reproduce
+## Steps to Reproduce
 
-1. Install hook with...
-2. Run Claude Code...
-3. Execute command...
-4. See error...
+1. Go to '...'
+2. Run command '...'
+3. Observe '...'
+4. See error
 
-## ✅ Expected Behavior
+## Expected Behavior
 
-What you expected to happen.
+A clear and concise description of what you expected to happen.
 
-## ❌ Actual Behavior
+## Actual Behavior
 
-What actually happened.
+A clear and concise description of what actually happened.
 
-## 📊 Environment
+## Environment
 
-- **Python Version:** (run `python3 --version`)
-- **OS:** (e.g., Ubuntu 22.04, macOS 13, Windows 11)
-- **Claude Code Version:** (if known)
-- **Hook Version:** (from CHANGELOG.md or git tag)
+- **Python Version**: (e.g., 3.11.5)
+- **FACT Version**: (e.g., 1.0.0)
+- **Operating System**: (e.g., Ubuntu 22.04, macOS 13, Windows 11)
+- **Claude API Version**: (if relevant)
+- **Installation Method**: (pip, source, docker)
 
-## 📝 Logs
-
-```
-Paste relevant logs here from:
-- ~/.claude/hooks/silent-alarm-detector/data/detection_history.jsonl
-- ~/.claude/debug/*.txt
-- Error messages from terminal
-```
-
-## 💻 Code Sample
+## Code Sample
 
 ```python
 # Minimal code that reproduces the issue
+from fact import FACTClient
+
+client = FACTClient()
+# ... rest of code
 ```
 
-## 🔍 Additional Context
+## Error Messages / Logs
 
-Add any other context about the problem here:
-- Screenshots
-- Related issues
-- Workarounds tried
-- Configuration changes
+```
+Paste error messages or relevant logs here
+```
 
-## ✨ Possible Solution
+## Cache Configuration
 
-(Optional) If you have ideas on how to fix this.
+- Cache backend: (memory, redis, file)
+- Cache size/limits:
+- TTL settings:
 
----
+## Additional Context
 
-**Checklist:**
-- [ ] I searched existing issues before creating this one
-- [ ] I tested with the latest version
-- [ ] I provided all requested information above
-- [ ] I included logs and code samples
+Add any other context about the problem here (screenshots, related issues, etc.)
+
+## Possible Solution
+
+(Optional) Suggest a fix or reason for the bug if you have one.

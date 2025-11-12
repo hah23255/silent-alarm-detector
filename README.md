@@ -2,10 +2,165 @@
 
 **A Claude Code hook that detects when LLMs silence alarms or bypass "minor" issues that have crushing impact on code performance and security.**
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Python 3.7+](https://img.shields.io/badge/python-3.7+-blue.svg)](https://www.python.org/downloads/)
-[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
+[![CI](https://github.com/hah23255/silent-alarm-detector/actions/workflows/ci.yml/badge.svg)](https://github.com/hah23255/silent-alarm-detector/actions/workflows/ci.yml)
+[![codecov](https://codecov.io/gh/hah23255/silent-alarm-detector/branch/main/graph/badge.svg)](https://codecov.io/gh/hah23255/silent-alarm-detector)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge&logo=opensourceinitiative&logoColor=white)](https://opensource.org/licenses/MIT)
+[![Python 3.7+](https://img.shields.io/badge/Python-3.7%2B-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/downloads/)
+[![Code style: black](https://img.shields.io/badge/Code_Style-black-000000?style=for-the-badge&logo=python&logoColor=white)](https://github.com/psf/black)
+[![PRs Welcome](https://img.shields.io/badge/PRs-Welcome-brightgreen?style=for-the-badge)](CONTRIBUTING.md)
+[![Claude Code](https://img.shields.io/badge/Claude_Code-Hook-7C3AED?style=for-the-badge&logo=anthropic&logoColor=white)](https://claude.ai/code)
+
+---
+
+## 🚀 Quick Start (30 seconds)
+
+### Installation
+```bash
+# Clone the repository
+git clone https://github.com/hah23255/silent-alarm-detector.git
+cd silent-alarm-detector
+
+# Install as pre-commit hook
+pip install -e .
+pre-commit install
+```
+
+### Expected Output
+```bash
+✅ silent-alarm-detector installed successfully
+✅ Pre-commit hook configured
+🚨 Now monitoring commits for alarm-silencing patterns
+```
+
+### Test It
+```bash
+# Try committing code with a silent exception
+echo "try:\n    risky_op()\nexcept:\n    pass" > test.py
+git add test.py
+git commit -m "test"
+
+# You'll see:
+# 🚨 CRITICAL: Silent fallback detected! Commit BLOCKED.
+# See report for details and recommended fixes.
+```
+
+📖 **[Full Documentation](docs/)** | 🎯 **[Pattern Examples](examples/)** | 💬 **[Get Help](https://github.com/hah23255/silent-alarm-detector/issues)**
+
+---
+
+## 🏗️ Architecture
+
+### Hook Detection Flow
+
+```mermaid
+graph TD
+    A[Pre-commit Hook Triggered] --> B[Load Configuration]
+    B --> C[Scan Staged Files]
+    C --> D{File Type?}
+
+    D -->|Python| E[Python Pattern Detector]
+    D -->|JavaScript| F[JS Pattern Detector]
+    D -->|Other| G[Generic Detector]
+
+    E --> H{8 Pattern Checks}
+    F --> H
+    G --> H
+
+    H --> I{Silent Fallback?}
+    H --> J{Warning Suppression?}
+    H --> K{Assumption Bypass?}
+    H --> L{Other Patterns?}
+
+    I -->|Detected| M[Calculate Impact]
+    J -->|Detected| M
+    K -->|Detected| M
+    L -->|Detected| M
+
+    M --> N{Severity Level}
+
+    N -->|CRITICAL| O[❌ BLOCK Commit]
+    N -->|WARNING| P[⚠️ WARN + Allow]
+    N -->|INFO| Q[ℹ️ LOG + Allow]
+
+    O --> R[Generate Report]
+    P --> R
+    Q --> R
+
+    R --> S[Show Recommendations]
+    S --> T[Exit Hook]
+
+    style I fill:#DC3545
+    style O fill:#DC3545
+    style P fill:#FFC107
+    style Q fill:#17A2B8
+```
+
+### Pattern Detection System
+
+```mermaid
+sequenceDiagram
+    participant Git
+    participant Hook
+    participant Scanner
+    participant Analyzer
+    participant Reporter
+
+    Git->>Hook: pre-commit triggered
+    Hook->>Scanner: Get staged files
+    Scanner->>Scanner: Filter by extension
+
+    loop For each file
+        Scanner->>Analyzer: Check patterns
+        Analyzer->>Analyzer: Run 8 detectors
+
+        alt Pattern Found
+            Analyzer->>Analyzer: Calculate impact
+            Analyzer->>Reporter: Add finding
+        end
+    end
+
+    Reporter->>Reporter: Aggregate results
+    Reporter->>Reporter: Calculate severity
+
+    alt CRITICAL found
+        Reporter-->>Hook: Block commit
+        Hook-->>Git: Exit code 1
+        Git-->>User: ❌ Commit blocked
+    else WARNING only
+        Reporter-->>Hook: Allow with warning
+        Hook-->>Git: Exit code 0
+        Git-->>User: ⚠️ Commit allowed
+    end
+```
+
+### Impact Assessment Matrix
+
+```mermaid
+graph LR
+    subgraph "Detection"
+        A[Pattern Found] --> B{Pattern Type}
+    end
+
+    subgraph "Impact Scoring"
+        B -->|Silent Fallback| C[Performance: HIGH]
+        B -->|Warning Suppress| D[Security: HIGH]
+        B -->|No Validation| E[Maintainability: CRITICAL]
+
+        C --> F{Total Score}
+        D --> F
+        E --> F
+    end
+
+    subgraph "Decision"
+        F -->|Score > 8| G[BLOCK ❌]
+        F -->|Score 5-8| H[WARN ⚠️]
+        F -->|Score < 5| I[INFO ℹ️]
+    end
+
+    style G fill:#DC3545
+    style H fill:#FFC107
+    style I fill:#17A2B8
+```
 
 ---
 

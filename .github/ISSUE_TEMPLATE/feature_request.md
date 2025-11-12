@@ -1,75 +1,67 @@
 ---
-name: Feature Request
-about: Suggest a new feature or enhancement
+name: Feature request
+about: Suggest an idea for this project
 title: '[FEATURE] '
 labels: enhancement
 assignees: ''
 ---
 
-## 💡 Feature Description
+## Problem Statement
 
-A clear and concise description of the feature you'd like to see.
+**Is your feature request related to a problem? Please describe.**
 
-## 🎯 Problem Statement
+A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
 
-What problem does this feature solve? What pain point does it address?
+## Proposed Solution
 
-**Example:**
-"Currently when X happens, I have to manually Y, which is tedious because..."
+**Describe the solution you'd like**
 
-## ✨ Proposed Solution
+A clear and concise description of what you want to happen.
 
-Describe how you envision this feature working.
+## Use Case
 
-**Example:**
-"I'd like the hook to automatically detect Z pattern and suggest..."
+**Describe your use case**
 
-## 🔄 Alternatives Considered
+- Who would benefit from this feature?
+- How would it be used?
+- What problem does it solve?
 
-Have you considered any alternative solutions or features?
+## Example
 
-## 📊 Use Cases
-
-Describe specific scenarios where this feature would be useful:
-
-1. **Use Case 1:** ...
-2. **Use Case 2:** ...
-3. **Use Case 3:** ...
-
-## 🎨 Mockups / Examples
-
-(Optional) Provide mockups, code examples, or screenshots showing how this might look:
+**Code example of how it would work**
 
 ```python
-# Example of how the feature might work
+# Example of proposed API/usage
+client = FACTClient()
+result = client.new_feature(...)  # How you imagine using it
 ```
 
-## 🚀 Priority
+## Alternatives Considered
+
+**Describe alternatives you've considered**
+
+A clear and concise description of any alternative solutions or features you've considered.
+
+## Implementation Ideas
+
+**How might this be implemented?**
+
+(Optional) Technical approach, architecture changes, or API design suggestions.
+
+## Additional Context
+
+**Add any other context or screenshots about the feature request here.**
+
+- Related documentation
+- Similar features in other projects
+- Performance considerations
+- Breaking changes?
+
+## Priority
 
 How important is this feature to you?
 
-- [ ] Critical - Blocking my workflow
-- [ ] High - Would significantly improve my experience
+- [ ] Critical - Blocking my usage
+- [ ] High - Significantly improves workflow
 - [ ] Medium - Nice to have
-- [ ] Low - Just an idea
-
-## 🤝 Contribution
-
-Would you be willing to help implement this feature?
-
-- [ ] Yes, I can submit a PR
-- [ ] Yes, I can help with testing
-- [ ] Yes, I can help with documentation
-- [ ] No, but I'd be happy to provide feedback
-
-## 📚 Additional Context
-
-Add any other context, links to research, or related features from other tools.
-
----
-
-**Checklist:**
-- [ ] I searched existing issues/PRs for similar requests
-- [ ] I provided clear use cases
-- [ ] I explained why this would be valuable
-- [ ] I considered implementation complexity
+- [ ] Low - Minor improvement
